@@ -1,13 +1,11 @@
-import * as dotenv from 'dotenv';
 import mysql from 'mysql2/promise';
-
-dotenv.config()
+import { MYSQL_HOST, MYSQL_USERNAME, MYSQL_PASSWORD, MYSQL_DATABASE } from '$env/static/private';
 
 const connection = await mysql.createConnection({
-	host: process.env.MYSQL_HOST,
-	user: process.env.MYSQL_USERNAME,
-	password: process.env.MYSQL_PASSWORD,
-	database: process.env.MYSQL_DATABASE,
+	host: MYSQL_HOST,
+	user: MYSQL_USERNAME,
+	password: MYSQL_PASSWORD,
+	database: MYSQL_DATABASE,
 });
 
 export default connection;
