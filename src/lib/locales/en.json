@@ -1,0 +1,13 @@
+{
+  "store-name": "Model Store",
+  "login-page": {
+    "header-sign-in-text": "Sign in to your account",
+    "label-your-email": "Your email",
+    "label-your-password": "Your password",
+    "label-remember-me": "Remember Me",
+    "label-forgot-password": "Forgot password?",
+    "label-sign-up": "Sign up",
+    "label-no-account": "Don’t have an account yet?",
+    "email-placeholder": "name@company.com"
+  }
+}

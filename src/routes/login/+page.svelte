@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { PUBLIC_STORE_NAME } from '$env/static/public';
-	import type { PageData, ActionData } from './$types';
-	const storeName = PUBLIC_STORE_NAME;
+	import { _ } from "svelte-i18n"
+	import type { PageData, ActionData } from "./$types";
 
 	export let form: ActionData;
   </script>
@@ -10,20 +9,20 @@
 	<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
 		<p class="flex items-center mb-6 text-2xl font-semibold text-gray-900">
 			<img class="w-8 h-8 mr-2" src="./svelte_logo.svg" alt="logo">
-			{ storeName }
+			{$_("store-name")}
 		</p>
 		<div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
 			<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
 				<h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-					Sign in to your account
+					{$_("login-page.header-sign-in-text")}
 				</h1>
 				<form class="space-y-4 md:space-y-6" method="post">
 					<div>
-						<label for="email" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
-						<input type="email" name="email" id="email" class="bg-g`ray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="name@company.com" required>
+						<label for="email" class="block mb-2 text-sm font-medium text-gray-900">{$_("login-page.label-your-email")}</label>
+						<input type="email" name="email" id="email" class="bg-g`ray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="{$_("login-page.email-placeholder")}" required>
 					</div>
 					<div>
-						<label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
+						<label for="password" class="block mb-2 text-sm font-medium text-gray-900">{$_("login-page.label-your-password")}</label>
 						<input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
 					</div>
 					<div class="flex items-center justify-between">
@@ -32,14 +31,14 @@
 							  <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300" required>
 							</div>
 							<div class="ml-3 text-sm">
-							  <label for="remember" class="text-gray-500">Remember me</label>
+							  <label for="remember" class="text-gray-500">{$_("login-page.label-remember-me")}</label>
 							</div>
 						</div>
-						<a href="/forgotpassword" class="text-sm font-medium text-blue-600 hover:underline">Forgot password?</a>
+						<a href="/forgotpassword" class="text-sm font-medium text-blue-600 hover:underline">{$_("login-page.label-forgot-password")}</a>
 					</div>
-					<button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign in</button>
+					<button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">{$_("login-page.header-sign-in-text")}</button>
 					<p class="text-sm font-light text-gray-500">
-						Don’t have an account yet? <a href="/register" class="font-medium text-blue-600 hover:underline">Sign up</a>
+						{$_("login-page.label-no-account")} <a href="/register" class="font-medium text-blue-600 hover:underline">{$_("login-page.label-sign-up")}</a>
 					</p>
 					{#if form}
 						<p class="text-red-500 italic text-center">{form.message}</p>
