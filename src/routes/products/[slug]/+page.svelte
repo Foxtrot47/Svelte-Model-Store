@@ -3,11 +3,12 @@
 	export let data: PageData;
 
 	const productInfo = data.productInfo;
+	const productPrice = data.productPrice;
 	const Images = data.images;
 	let actualPrice = 0.00;
-	if (productInfo != null)
+	if (productPrice  != null)
 		actualPrice =
-			productInfo.BasePrice - (productInfo.BasePrice * productInfo.BaseDiscountPercentage) / 100;
+			productPrice.BasePrice - (productPrice.BasePrice * productPrice.BaseDiscountPercentage) / 100;
 	
 </script>
 
@@ -67,10 +68,14 @@
 						$ {actualPrice}
 					</span>
 					<span class="text-sm text-gray-400 line-through">
-						$ {productInfo.BasePrice}
+						{#if productPrice != null}
+							$ {productPrice.BasePrice}
+						{/if}
 					</span>
 					<span class="text-lg font-semibold text-green-700">
-						{productInfo.BaseDiscountPercentage}% off
+						{#if productPrice != null}
+							{productPrice.BaseDiscountPercentage}% off
+						{/if}
 					</span>
 				</div>
 				<!--

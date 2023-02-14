@@ -1,29 +1,44 @@
 import type { PageServerLoad } from './$types';
-import connection from '$lib/server/mysql';
+import models from '$lib/server/mysql';
 
-export const load = ( async ({ params }) => {
+export const load = (async ({ params }) => {
+	if (params.slug == null) return;
 
-	if (params.slug == null)
-		return;
+	const productInfo = await models.product_localization.findOne({
+		where: { URL: params.slug, LocalizationID: 1},
+		raw: true,
+	});
+	
+	if (productInfo != null ) {
+		const images = await models.productimages.findAll({
+			where: { ProductID: productInfo.ProductID},
+			raw: true,
+		});
 
-	const [rows] = await connection.execute("CALL spGetProductInfoByURL(?,?)", [params.slug,1]);
+		const productDescriptionRow = await models.productdescription.findOne({
+			where: { ProductID: productInfo.ProductID, LocalizationID: 1},
+		})
 
-	if (Array.isArray(rows) && rows.length > 0 && Array.isArray(rows[0]) && rows[0].length > 0 ) {
+		const productDescription = productDescriptionRow?.ProductDescriptionHTML
 
-		const [imageRows] = await connection.execute("CALL spGetProductImages(?)", [rows[0][0].ProductID]);
+		const productPrice = await models.productprice.findOne({
+			where: {ProductID: productInfo.ProductID},
+			raw: true,
+		})
 
-		if (Array.isArray(imageRows) && imageRows.length > 0 && Array.isArray(imageRows[0]) && imageRows[0].length > 0 ) {
-			return {
-				message: null,
-				productInfo: rows[0][0],
-				images: imageRows[0]
-			};
-		}
+		return {
+			message: null,
+			productInfo,
+			images,
+			productDescription,
+			productPrice
+		};
 	}
 	return {
-		message: "Nothing found",
+		message: 'Nothing found',
 		productInfo: null,
-		images: null
+		images: null,
+		productDescription: null,
+		productPrice: null
 	};
-
 }) satisfies PageServerLoad;
