@@ -48,12 +48,12 @@ export class deliverydetails extends Model<deliverydetailsAttributes, deliveryde
     CreatedDate: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: Sequelize.Sequelize.fn('current_timestamp')
     },
     ModifiedDate: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: Sequelize.Sequelize.fn('current_timestamp')
     }
   }, {
     sequelize,

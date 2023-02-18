@@ -1,5 +1,6 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
+import type { productproperty, productpropertyId } from './productproperty';
 
 export interface productproperty_localizationAttributes {
   ProductPropertyLocalizationID: number;
@@ -19,6 +20,11 @@ export class productproperty_localization extends Model<productproperty_localiza
   LocalizationID!: number;
   PropertyName?: string;
 
+  // productproperty_localization belongsTo productproperty via ProductPropertyID
+  ProductProperty!: productproperty;
+  getProductProperty!: Sequelize.BelongsToGetAssociationMixin<productproperty>;
+  setProductProperty!: Sequelize.BelongsToSetAssociationMixin<productproperty, productpropertyId>;
+  createProductProperty!: Sequelize.BelongsToCreateAssociationMixin<productproperty>;
 
   static initModel(sequelize: Sequelize.Sequelize): typeof productproperty_localization {
     return productproperty_localization.init({
@@ -30,7 +36,11 @@ export class productproperty_localization extends Model<productproperty_localiza
     },
     ProductPropertyID: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'productproperty',
+        key: 'PropertyID'
+      }
     },
     LocalizationID: {
       type: DataTypes.INTEGER,
@@ -51,6 +61,13 @@ export class productproperty_localization extends Model<productproperty_localiza
         using: "BTREE",
         fields: [
           { name: "ProductPropertyLocalizationID" },
+        ]
+      },
+      {
+        name: "productproperty_localization_FK",
+        using: "BTREE",
+        fields: [
+          { name: "ProductPropertyID" },
         ]
       },
     ]

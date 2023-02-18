@@ -13,10 +13,10 @@ export interface usersAttributes {
   StatusID: number;
   MobileNumber?: string;
   PasswordCreatedDate?: Date;
-  IsLocked?: boolean;
+  IsLocked?: number;
   LockedAtTime?: Date;
   LockoutCounter?: number;
-  IsActivated: boolean;
+  IsActivated: number;
   ActivationToken?: string;
   GenderID?: number;
   Birthday?: Date;
@@ -41,10 +41,10 @@ export class users extends Model<usersAttributes, usersCreationAttributes> imple
   StatusID!: number;
   MobileNumber?: string;
   PasswordCreatedDate?: Date;
-  IsLocked?: boolean;
+  IsLocked?: number;
   LockedAtTime?: Date;
   LockoutCounter?: number;
-  IsActivated!: boolean;
+  IsActivated!: number;
   ActivationToken?: string;
   GenderID?: number;
   Birthday?: Date;
@@ -84,12 +84,12 @@ export class users extends Model<usersAttributes, usersCreationAttributes> imple
     CreatedDate: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: Sequelize.Sequelize.fn('current_timestamp')
     },
     ModifiedDate: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: Sequelize.Sequelize.fn('current_timestamp')
     },
     StatusID: {
       type: DataTypes.INTEGER,
@@ -119,7 +119,7 @@ export class users extends Model<usersAttributes, usersCreationAttributes> imple
     IsActivated: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: true
+      defaultValue: 1
     },
     ActivationToken: {
       type: DataTypes.STRING(20),

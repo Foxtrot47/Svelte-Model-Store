@@ -58,12 +58,12 @@ export class sellers extends Model<sellersAttributes, sellersCreationAttributes>
     CreatedDate: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: Sequelize.Sequelize.fn('current_timestamp')
     },
     ModifiedDate: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: Sequelize.Sequelize.fn('current_timestamp')
     },
     SellerGUID: {
       type: DataTypes.CHAR(36),

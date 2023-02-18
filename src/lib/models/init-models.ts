@@ -160,6 +160,10 @@ export function initModels(sequelize: Sequelize) {
   productgroup.hasMany(productgroup_localization, { as: "productgroup_localizations", foreignKey: "ProductGroupID"});
   productgroupmembership.belongsTo(productgroup, { as: "ProductGroup", foreignKey: "ProductGroupID"});
   productgroup.hasMany(productgroupmembership, { as: "productgroupmemberships", foreignKey: "ProductGroupID"});
+  productproperty_localization.belongsTo(productproperty, { as: "ProductProperty", foreignKey: "ProductPropertyID"});
+  productproperty.hasMany(productproperty_localization, { as: "productproperty_localizations", foreignKey: "ProductPropertyID"});
+  productpropertyvalue_localization.belongsTo(productproperty, { as: "ProductProperty", foreignKey: "ProductPropertyID"});
+  productproperty.hasMany(productpropertyvalue_localization, { as: "productpropertyvalue_localizations", foreignKey: "ProductPropertyID"});
 
   return {
     address: address,

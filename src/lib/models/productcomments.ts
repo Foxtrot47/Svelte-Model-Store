@@ -5,13 +5,13 @@ export interface productcommentsAttributes {
   ProductCommentID: number;
   ProductID: number;
   ParentID?: number;
-  IsDeleted: boolean;
+  IsDeleted: number;
   CreatedDate: Date;
   CommentTitle: string;
   CommentBody?: string;
-  IsQuestion: boolean;
+  IsQuestion: number;
   UserID: number;
-  IsVisible: boolean;
+  IsVisible: number;
 }
 
 export type productcommentsPk = "ProductCommentID";
@@ -23,13 +23,13 @@ export class productcomments extends Model<productcommentsAttributes, productcom
   ProductCommentID!: number;
   ProductID!: number;
   ParentID?: number;
-  IsDeleted!: boolean;
+  IsDeleted!: number;
   CreatedDate!: Date;
   CommentTitle!: string;
   CommentBody?: string;
-  IsQuestion!: boolean;
+  IsQuestion!: number;
   UserID!: number;
-  IsVisible!: boolean;
+  IsVisible!: number;
 
 
   static initModel(sequelize: Sequelize.Sequelize): typeof productcomments {
@@ -51,12 +51,12 @@ export class productcomments extends Model<productcommentsAttributes, productcom
     IsDeleted: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false
+      defaultValue: 0
     },
     CreatedDate: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: Sequelize.Sequelize.fn('current_timestamp')
     },
     CommentTitle: {
       type: DataTypes.STRING(100),
@@ -69,7 +69,7 @@ export class productcomments extends Model<productcommentsAttributes, productcom
     IsQuestion: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false
+      defaultValue: 0
     },
     UserID: {
       type: DataTypes.INTEGER.UNSIGNED,
@@ -78,7 +78,7 @@ export class productcomments extends Model<productcommentsAttributes, productcom
     IsVisible: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: true
+      defaultValue: 1
     }
   }, {
     sequelize,
