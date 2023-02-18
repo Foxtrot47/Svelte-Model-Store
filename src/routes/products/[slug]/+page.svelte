@@ -27,7 +27,7 @@
 	{#if productInfo != null}
 		<div class="flex flex-col gap-y-4">
 			<div class="flex flex-row gap-x-6 justify-center p-4 bg-white">
-				<div class="flex-none flex flex-row gap-x-1">
+				<div class="flex-none flex flex-row gap-x-1 sticky top-0 self-start h-auto">
 					<div class="flex flex-col gap-y-1">
 						{#if Array.isArray(Images)}
 							{#each Images as image}
