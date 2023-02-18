@@ -149,6 +149,10 @@
 							</ul>
 						</div>
 					</div>
+					<div class="flex flex-row gap-x-4">
+						<div>{$_("product-page.description-text")}</div>
+						<div>{productInfo.ShortDescription}</div>
+					</div>
 				</div>
 			</div>
 		</div>

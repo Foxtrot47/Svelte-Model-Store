@@ -12,6 +12,7 @@
     "email-placeholder": "name@company.com"
   },
   "product-page": {
-    "highlights-text": "Highlights"
+    "highlights-text": "Highlights",
+    "description-text": "Description"
   }
 }
