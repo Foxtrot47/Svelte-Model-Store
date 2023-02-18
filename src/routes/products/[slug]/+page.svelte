@@ -21,6 +21,7 @@
 	};
 
 	const productHighlights = data.productHighlights;
+	const productLongDescription = data.productLongDescription;
 </script>
 
 <div class="bg-gray-100 h-full">
@@ -154,6 +155,11 @@
 						<div>{productInfo.ShortDescription}</div>
 					</div>
 				</div>
+			</div>
+			<div id="product-long-description" class="p-4 w-full bg-white">
+				{#if productLongDescription != ""}
+					{@html productLongDescription}
+				{/if}
 			</div>
 		</div>
 	{/if}

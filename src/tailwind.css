@@ -1,3 +1,8 @@
 @tailwind base;
+
+h2 {
+    @apply text-xl font-semibold;
+  }
+
 @tailwind components;
 @tailwind utilities;

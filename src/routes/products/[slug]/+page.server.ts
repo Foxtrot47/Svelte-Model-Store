@@ -49,13 +49,20 @@ export const load = (async ({ params }) => {
 			raw: true
 		});
 
+		const productLongDescription = await models.productdescription.findOne({
+			where: { ProductID: productInfo.ProductID },
+		})
+		.then((row) => {
+			return String(row?.dataValues.ProductDescriptionHTML);
+		});
 		return {
 			message: null,
 			productInfo,
 			images,
 			productDescription,
 			productPrice,
-			productHighlights
+			productHighlights,
+			productLongDescription
 		};
 	}
 	return {
@@ -64,6 +71,7 @@ export const load = (async ({ params }) => {
 		images: null,
 		productDescription: null,
 		productPrice: null,
-		productHighlights: null
+		productHighlights: null,
+		productLongDescription: null
 	};
 }) satisfies PageServerLoad;
