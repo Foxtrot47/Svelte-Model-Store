@@ -10,5 +10,8 @@
     "label-sign-up": "Sign up",
     "label-no-account": "Don’t have an account yet?",
     "email-placeholder": "name@company.com"
+  },
+  "product-page": {
+    "highlights-text": "Highlights"
   }
 }

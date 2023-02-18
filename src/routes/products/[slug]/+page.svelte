@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import { _ } from "svelte-i18n";
 	export let data: PageData;
 
 	const productInfo = data.productInfo;
@@ -18,6 +19,8 @@
 		currentFocussedImageID = Number(imagElement.id.match(/\d/));
 		currentShowCaseImage.src = imagElement.src;
 	};
+
+	const productHighlights = data.productHighlights;
 </script>
 
 <div class="bg-gray-100 h-full">
@@ -131,14 +134,21 @@
 							{/if}
 						</span>
 					</div>
-					<!--
-				<div class="flex flex-row gap-x-2">
-					<span class="font-light">Seller Name</span>
-					<span class="text-blue-500 font-semibold text-lg">
-						Seller Name
-					</span>
-				</div>
-				-->
+					<div class="flex flex-col md:flex-row gap-4">
+						<div id="div-highlights" class="flex flex-row gap-x-9">
+							<div>{$_('product-page.highlights-text')}</div>
+							<ul class="space-y-2 list-disc text-gray-700">
+								{#if productHighlights != null}
+								{#each productHighlights as productHighlight }
+									<li class="space-x-2">
+										<span>{productHighlight["productproperty_localizations.PropertyName"]}:</span>
+										<span>{productHighlight["productpropertyvalue_localizations.ProductPropertyValue"]}</span>
+									</li>
+								{/each}
+								{/if}
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
