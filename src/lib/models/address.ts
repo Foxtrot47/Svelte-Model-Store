@@ -16,7 +16,7 @@ export interface addressAttributes {
   PersonName?: string;
   Company?: string;
   DisplayName?: string;
-  IsDefault: boolean;
+  IsDefault: number;
   StatusID: number;
   UserGroupId?: number;
   AddressReference?: string;
@@ -47,7 +47,7 @@ export class address extends Model<addressAttributes, addressCreationAttributes>
   PersonName?: string;
   Company?: string;
   DisplayName?: string;
-  IsDefault!: boolean;
+  IsDefault!: number;
   StatusID!: number;
   UserGroupId?: number;
   AddressReference?: string;
@@ -121,7 +121,7 @@ export class address extends Model<addressAttributes, addressCreationAttributes>
     IsDefault: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false
+      defaultValue: 0
     },
     StatusID: {
       type: DataTypes.INTEGER,

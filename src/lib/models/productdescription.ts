@@ -4,7 +4,7 @@ import { DataTypes, Model, Optional } from 'sequelize';
 export interface productdescriptionAttributes {
   ProductDescriptionID: number;
   ProductID: number;
-  ProductDescriptionHTML?: any;
+  ProductDescriptionHTML?: string;
   LocalizationID: number;
 }
 
@@ -16,7 +16,7 @@ export type productdescriptionCreationAttributes = Optional<productdescriptionAt
 export class productdescription extends Model<productdescriptionAttributes, productdescriptionCreationAttributes> implements productdescriptionAttributes {
   ProductDescriptionID!: number;
   ProductID!: number;
-  ProductDescriptionHTML?: any;
+  ProductDescriptionHTML?: string;
   LocalizationID!: number;
 
 
@@ -33,7 +33,7 @@ export class productdescription extends Model<productdescriptionAttributes, prod
       allowNull: false
     },
     ProductDescriptionHTML: {
-      type: DataTypes.BLOB,
+      type: DataTypes.TEXT,
       allowNull: true
     },
     LocalizationID: {

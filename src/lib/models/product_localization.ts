@@ -57,7 +57,7 @@ export class product_localization extends Model<product_localizationAttributes, 
       allowNull: false
     },
     ShortDescription: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.TEXT,
       allowNull: true
     },
     DisplayName: {
