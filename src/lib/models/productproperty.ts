@@ -7,7 +7,6 @@ import type { productpropertyvalue_localization, productpropertyvalue_localizati
 export interface productpropertyAttributes {
   PropertyID: number;
   ProductID?: number;
-  ProductGroupID?: number;
   IsRequired: number;
   UsedforPriceCalculation: number;
   ParentPropertyID?: number;
@@ -17,13 +16,12 @@ export interface productpropertyAttributes {
 
 export type productpropertyPk = "PropertyID";
 export type productpropertyId = productproperty[productpropertyPk];
-export type productpropertyOptionalAttributes = "PropertyID" | "ProductID" | "ProductGroupID" | "IsRequired" | "UsedforPriceCalculation" | "ParentPropertyID" | "IsParent" | "IsSelectable";
+export type productpropertyOptionalAttributes = "PropertyID" | "ProductID" | "IsRequired" | "UsedforPriceCalculation" | "ParentPropertyID" | "IsParent" | "IsSelectable";
 export type productpropertyCreationAttributes = Optional<productpropertyAttributes, productpropertyOptionalAttributes>;
 
 export class productproperty extends Model<productpropertyAttributes, productpropertyCreationAttributes> implements productpropertyAttributes {
   PropertyID!: number;
   ProductID?: number;
-  ProductGroupID?: number;
   IsRequired!: number;
   UsedforPriceCalculation!: number;
   ParentPropertyID?: number;
@@ -75,10 +73,6 @@ export class productproperty extends Model<productpropertyAttributes, productpro
         model: 'product',
         key: 'ProductID'
       }
-    },
-    ProductGroupID: {
-      type: DataTypes.INTEGER,
-      allowNull: true
     },
     IsRequired: {
       type: DataTypes.BOOLEAN,
