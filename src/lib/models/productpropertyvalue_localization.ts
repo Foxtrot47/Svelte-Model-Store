@@ -1,5 +1,6 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
+import type { product, productId } from './product';
 import type { productproperty, productpropertyId } from './productproperty';
 
 export interface productpropertyvalue_localizationAttributes {
@@ -7,11 +8,13 @@ export interface productpropertyvalue_localizationAttributes {
   ProductPropertyID: number;
   ProductPropertyValue: string;
   LocalizationID?: number;
+  PriceModifier?: number;
+  ProductID?: number;
 }
 
 export type productpropertyvalue_localizationPk = "ProductPropertyValueID";
 export type productpropertyvalue_localizationId = productpropertyvalue_localization[productpropertyvalue_localizationPk];
-export type productpropertyvalue_localizationOptionalAttributes = "ProductPropertyValueID" | "LocalizationID";
+export type productpropertyvalue_localizationOptionalAttributes = "ProductPropertyValueID" | "LocalizationID" | "PriceModifier" | "ProductID";
 export type productpropertyvalue_localizationCreationAttributes = Optional<productpropertyvalue_localizationAttributes, productpropertyvalue_localizationOptionalAttributes>;
 
 export class productpropertyvalue_localization extends Model<productpropertyvalue_localizationAttributes, productpropertyvalue_localizationCreationAttributes> implements productpropertyvalue_localizationAttributes {
@@ -19,7 +22,14 @@ export class productpropertyvalue_localization extends Model<productpropertyvalu
   ProductPropertyID!: number;
   ProductPropertyValue!: string;
   LocalizationID?: number;
+  PriceModifier?: number;
+  ProductID?: number;
 
+  // productpropertyvalue_localization belongsTo product via ProductID
+  Product!: product;
+  getProduct!: Sequelize.BelongsToGetAssociationMixin<product>;
+  setProduct!: Sequelize.BelongsToSetAssociationMixin<product, productId>;
+  createProduct!: Sequelize.BelongsToCreateAssociationMixin<product>;
   // productpropertyvalue_localization belongsTo productproperty via ProductPropertyID
   ProductProperty!: productproperty;
   getProductProperty!: Sequelize.BelongsToGetAssociationMixin<productproperty>;
@@ -49,6 +59,18 @@ export class productpropertyvalue_localization extends Model<productpropertyvalu
     LocalizationID: {
       type: DataTypes.INTEGER,
       allowNull: true
+    },
+    PriceModifier: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    ProductID: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'product',
+        key: 'ProductID'
+      }
     }
   }, {
     sequelize,
@@ -64,7 +86,14 @@ export class productpropertyvalue_localization extends Model<productpropertyvalu
         ]
       },
       {
-        name: "productpropertyvalue_localization_FK",
+        name: "FK_PPVL_ProductID",
+        using: "BTREE",
+        fields: [
+          { name: "ProductID" },
+        ]
+      },
+      {
+        name: "FK_PPVL_PropertyID",
         using: "BTREE",
         fields: [
           { name: "ProductPropertyID" },

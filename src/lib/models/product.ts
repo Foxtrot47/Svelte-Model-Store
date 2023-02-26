@@ -5,6 +5,7 @@ import type { productgroupmembership, productgroupmembershipId } from './product
 import type { productimages, productimagesId } from './productimages';
 import type { productprice, productpriceId } from './productprice';
 import type { productproperty, productpropertyId } from './productproperty';
+import type { productpropertyvalue_localization, productpropertyvalue_localizationId } from './productpropertyvalue_localization';
 
 export interface productAttributes {
   ProductID: number;
@@ -86,6 +87,18 @@ export class product extends Model<productAttributes, productCreationAttributes>
   hasProductproperty!: Sequelize.HasManyHasAssociationMixin<productproperty, productpropertyId>;
   hasProductproperties!: Sequelize.HasManyHasAssociationsMixin<productproperty, productpropertyId>;
   countProductproperties!: Sequelize.HasManyCountAssociationsMixin;
+  // product hasMany productpropertyvalue_localization via ProductID
+  productpropertyvalue_localizations!: productpropertyvalue_localization[];
+  getProductpropertyvalue_localizations!: Sequelize.HasManyGetAssociationsMixin<productpropertyvalue_localization>;
+  setProductpropertyvalue_localizations!: Sequelize.HasManySetAssociationsMixin<productpropertyvalue_localization, productpropertyvalue_localizationId>;
+  addProductpropertyvalue_localization!: Sequelize.HasManyAddAssociationMixin<productpropertyvalue_localization, productpropertyvalue_localizationId>;
+  addProductpropertyvalue_localizations!: Sequelize.HasManyAddAssociationsMixin<productpropertyvalue_localization, productpropertyvalue_localizationId>;
+  createProductpropertyvalue_localization!: Sequelize.HasManyCreateAssociationMixin<productpropertyvalue_localization>;
+  removeProductpropertyvalue_localization!: Sequelize.HasManyRemoveAssociationMixin<productpropertyvalue_localization, productpropertyvalue_localizationId>;
+  removeProductpropertyvalue_localizations!: Sequelize.HasManyRemoveAssociationsMixin<productpropertyvalue_localization, productpropertyvalue_localizationId>;
+  hasProductpropertyvalue_localization!: Sequelize.HasManyHasAssociationMixin<productpropertyvalue_localization, productpropertyvalue_localizationId>;
+  hasProductpropertyvalue_localizations!: Sequelize.HasManyHasAssociationsMixin<productpropertyvalue_localization, productpropertyvalue_localizationId>;
+  countProductpropertyvalue_localizations!: Sequelize.HasManyCountAssociationsMixin;
 
   static initModel(sequelize: Sequelize.Sequelize): typeof product {
     return product.init({

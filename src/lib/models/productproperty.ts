@@ -12,11 +12,12 @@ export interface productpropertyAttributes {
   UsedforPriceCalculation: number;
   ParentPropertyID?: number;
   IsParent?: number;
+  IsSelectable: number;
 }
 
 export type productpropertyPk = "PropertyID";
 export type productpropertyId = productproperty[productpropertyPk];
-export type productpropertyOptionalAttributes = "PropertyID" | "ProductID" | "ProductGroupID" | "IsRequired" | "UsedforPriceCalculation" | "ParentPropertyID" | "IsParent";
+export type productpropertyOptionalAttributes = "PropertyID" | "ProductID" | "ProductGroupID" | "IsRequired" | "UsedforPriceCalculation" | "ParentPropertyID" | "IsParent" | "IsSelectable";
 export type productpropertyCreationAttributes = Optional<productpropertyAttributes, productpropertyOptionalAttributes>;
 
 export class productproperty extends Model<productpropertyAttributes, productpropertyCreationAttributes> implements productpropertyAttributes {
@@ -27,6 +28,7 @@ export class productproperty extends Model<productpropertyAttributes, productpro
   UsedforPriceCalculation!: number;
   ParentPropertyID?: number;
   IsParent?: number;
+  IsSelectable!: number;
 
   // productproperty belongsTo product via ProductID
   Product!: product;
@@ -95,6 +97,11 @@ export class productproperty extends Model<productpropertyAttributes, productpro
     IsParent: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
+      defaultValue: 0
+    },
+    IsSelectable: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
       defaultValue: 0
     }
   }, {

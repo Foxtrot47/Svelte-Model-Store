@@ -70,6 +70,13 @@ export class productproperty_localization extends Model<productproperty_localiza
           { name: "ProductPropertyID" },
         ]
       },
+      {
+        name: "productproperty_localization_PropertyName_IDX",
+        using: "BTREE",
+        fields: [
+          { name: "PropertyName" },
+        ]
+      },
     ]
   });
   }
